@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.beantownloner.bakingapp">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+   <!-- <uses-permission android:name="android.permission.BIND_REMOTEVIEWS" /> -->
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".RecipeDetailActivity"
+            android:label="@string/title_activity_recipe_detail"
+            android:launchMode="singleTop"
+            android:parentActivityName=".MainActivity"
+             >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name=".RecipeStepDetailActivity"
+            android:label="@string/title_activity_recipe_step_detail"
+            android:launchMode="singleTop"
+            android:parentActivityName=".RecipeDetailActivity"
+             >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".RecipeDetailActivity" />
+        </activity>
+        <activity android:name=".IngredientsDetailActivity"
+            android:label="@string/ingredient_of"
+            android:launchMode="singleTop"
+            android:parentActivityName=".RecipeDetailActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".RecipeDetailActivity" />
+        </activity>
+
+        <receiver android:name=".BakingAppWidgetPrvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/baking_app_widget_prvider_info" />
+        </receiver>
+
+        <service
+            android:name=".service.IngredientListWidgetService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_REMOTEVIEWS"></service>
+    </application>
+
+</manifest>
